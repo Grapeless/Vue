@@ -16,15 +16,47 @@
         (2).通过vm.$watch监视
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
-    <h2>今天天气很</h2>
-    <button>切换天气</button>
+  <div id="root9-1">
+    <h2>今天天气很{{ info }}</h2>
+    <!--<button @click="changeWeather">切换天气</button>-->
+    <button @click="isHot =! isHot">切换天气</button>
   </div>
 </body>
 
 <script type="text/javascript">
     Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-
+    const vm  = new Vue({
+        el: '#root9-1',
+        data: {
+            isHot: true
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            }
+        },
+        //可监视计算属性和data里的属性
+        watch: {
+            info: {
+                Immediate: true,
+                handler(newValue, oldValue) {
+                    console.log('info被修改了', newValue, oldValue)
+                }
+            }
+        }
+    })
+    //通过Vue实例对象的.$watch监视
+    vm.$watch('isHot', {
+        Immediate: true,
+        handler(newValue, oldValue) {
+            console.log('isHot被修改了', newValue, oldValue)
+        }
+    })
 
 </script>
 </html>

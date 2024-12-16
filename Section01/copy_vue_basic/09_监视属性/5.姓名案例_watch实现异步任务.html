@@ -21,17 +21,19 @@
         el: '#root8-3',
         data: {
             firstName: '张',
-            lastName: '三'
+            lastName: '三',
+            fullName:'张三'
         },
-        computed: {
-            /*fullName: {
-                get() {
-                    return `${this.firstName}-${this.lastName}`
-                }
-            }*/
-            //只存在get方法时可简写
-            fullName(){
-                return `${this.firstName}-${this.lastName}`
+        watch:{
+            firstName(newValue){
+                setTimeout(()=>{
+                    this.fullName = newValue + this.lastName
+                },1000)
+            },
+            lastName(newValue){
+                setTimeout(()=>{
+                    this.fullName = this.firstName + newValue
+                },1000)
             }
         }
 

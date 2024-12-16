@@ -25,21 +25,35 @@
         3.备注：使用v-if的时，元素可能无法获取到，而使用v-show一定可以获取到。
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
-    <h2>当前的n值是:</h2>
-    <button>点我n+1</button>
+  <div id="root11">
+    <h2>当前的n值是:{{n}}</h2>
+    <button @click="n++">点我n+1</button>
+    <div v-show="n===5">555</div>
 
-    <template>
+    <!--<template v-if="n === 1">
       <h2>你好</h2>
       <h2>尚硅谷</h2>
       <h2>北京</h2>
     </template>
+    <div v-else><h2>什么都没有了</h2></div>-->
+
+    <template>
+      <h2 v-if="n===1">你好</h2>
+      <h2 v-else-if="n===2">尚硅谷</h2>
+      <h2 v-else>北京</h2>
+    </template>
+
 
   </div>
 </body>
 
 <script type="text/javascript">
     Vue.config.productionTip = false
-
+new Vue({
+    el:'#root11',
+    data:{
+        n:0
+    }
+})
 </script>
 </html>

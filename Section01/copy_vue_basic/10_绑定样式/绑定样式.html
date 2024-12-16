@@ -53,30 +53,59 @@
           :style="[a,b]"其中a、b是样式对象。
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
-    <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定 -->
-    <div class="basic" ></div>
+  <div id="root10">
+    <!-- 绑定class样式--字符串写法，适用于：样式的类名(单个)不确定，需要动态指定 -->
+    <div class="basic" :class="mood" @click="changeMood">text</div>
     <br/><br/>
 
     <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定、名字也不确定 -->
-    <div class="basic" ></div>
+    <div class="basic" :class="classArr">text</div>
     <br/><br/>
 
     <!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用 -->
-    <div class="basic" ></div>
+    <div class="basic" :class="classObj">text</div>
     <br/><br/>
 
     <!-- 绑定style样式--对象写法 -->
-    <div class="basic" ></div>
+    <div class="basic" :style="styleObj">text</div>
     <br/><br/>
     <!-- 绑定style样式--数组写法 -->
-    <div class="basic" ></div>
+    <div class="basic" :style="styleArr">text</div>
   </div>
 </body>
 
 <script type="text/javascript">
     Vue.config.productionTip = false
-
+    new Vue({
+        el: '#root10',
+        data: {
+            mood: 'normal',
+            //增强过的语法，可使class属性的值为对象或数组
+            classArr: ['atguigu1', 'atguigu2', 'atguigu3'], //直接存放类名字符串
+            //键：类名  值：控制该类的应用与否
+            classObj: {
+                atguigu1: true,
+                atguigu2: true,
+                atguigu3: true
+            },
+            styleObj:{
+                fontSize:'50px'
+            },
+            styleArr:[
+                {
+                    fontSize:'30px'
+                },
+                {
+                    backgroundColor:'yellow'
+                }
+            ]
+        },
+        methods: {
+            changeMood() {
+                this.mood = ['happy', 'normal', 'sad'][Math.floor(Math.random() * 3)]
+            }
+        }
+    })
 
 </script>
 
