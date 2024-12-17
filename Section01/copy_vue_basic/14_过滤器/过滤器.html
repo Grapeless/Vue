@@ -18,16 +18,16 @@
       2.并没有改变原本的数据, 是产生新的对应的数据
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
+  <div id="root14">
     <h2>显示格式化后的时间</h2>
     <!-- 计算属性实现 -->
-    <h3>现在是：</h3>
+    <h3>现在是：{{formatedTime}}</h3>
     <!-- methods实现 -->
-    <h3>现在是：</h3>
+    <h3>现在是：{{formatTime()}}</h3>
     <!-- 过滤器实现 -->
-    <h3>现在是：</h3>
+    <h3>现在是：{{now | format}}</h3>
     <!-- 过滤器实现（传参） -->
-    <h3>现在是：</h3>
+    <h3>现在是：{{now | format('YYYY-MM-DD') | mySlice}}</h3>
     <h3 >尚硅谷</h3>
   </div>
 
@@ -39,6 +39,31 @@
 <script type="text/javascript">
     Vue.config.productionTip = false
     //全局过滤器
+    Vue.filter('mySlice',function (value) {
+        return value.slice(0,4)
+    })
 
+    new Vue({
+        el:'#root14',
+        data:{
+            now:Date.now()
+        },
+        computed:{
+            formatedTime(){
+                return dayjs().format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        methods:{
+            formatTime(){
+                return dayjs().format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        filters:{
+            format(value,str='YYYY-MM-DD HH:mm:ss'){
+                return  dayjs(value).format(str)
+            }
+
+        }
+    })
 </script>
 </html>
