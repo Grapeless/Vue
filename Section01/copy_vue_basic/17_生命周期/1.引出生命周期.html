@@ -15,15 +15,28 @@
       4.生命周期函数中的this指向是vm 或 组件实例对象。
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
+  <div id="root17-1">
     <h2 >你好啊</h2>
-    <h2 >欢迎学习Vue</h2>
+    <h2 :style="{opacity}">欢迎学习Vue</h2>
   </div>
 </body>
 
 <script type="text/javascript">
     Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-
+    new Vue({
+        el: '#root17-1',
+        data: {
+            opacity: 1
+        },
+        mounted(){
+            setInterval(()=>{
+                this.opacity -= 0.01
+                if(this.opacity <= 0){
+                    this.opacity = 1
+                }
+            },16)
+        }
+    })
 
 
 </script>

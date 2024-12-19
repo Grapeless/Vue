@@ -17,15 +17,21 @@
       2.使用css配合v-cloak可以解决网速慢时页面展示出{{xxx}}的问题。
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
-    <h2 ></h2>
+  <div id="root15-3">
+    <h2 v-cloak>{{content}}</h2>
   </div>
-  <script type="text/javascript" src="http://localhost:8080/resource/5s/vue.js"></script>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <!--<script type="text/javascript" src="http://localhost:8080/resource/5s/vue.js"></script>-->
 </body>
 
 <script type="text/javascript">
     Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-
+    new Vue({
+        el:'#root15-3',
+        data:{
+            content:'text'
+        }
+    })
 
 </script>
 </html>

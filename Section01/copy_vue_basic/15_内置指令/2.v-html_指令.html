@@ -18,16 +18,21 @@
             (2).一定要在可信的内容上使用v-html，永不要用在用户提交的内容上！
 -->
   <!-- 准备好一个容器-->
-  <div id="root">
+  <div id="root15-2">
     <div>你好，</div>
-    <div></div>
-    <div></div>
+    <div v-html="str"></div>
+    <div v-html="`123<h2>456</h2>`"></div>
   </div>
 </body>
 
 <script type="text/javascript">
     Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-
+    new Vue({
+        el:'#root15-2',
+        data:{
+            str:'<h1>666</h1>'
+        }
+    })
 
 </script>
 </html>
