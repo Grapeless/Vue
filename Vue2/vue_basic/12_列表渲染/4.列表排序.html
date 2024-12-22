@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>列表排序</title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 准备好一个容器-->
+  <div id="root12-4">
+    <h2>人员列表</h2>
+    <input type="text" placeholder="请输入名字" v-model="keyword">
+    <button @click="sortType =2">年龄升序</button>
+    <button @click="sortType =1">年龄降序</button>
+    <button @click="sortType =0">原顺序</button>
+    <ul>
+      <li v-for="value in filteredPerson" :key="value.id">
+        {{ value.name }}-{{ value.age }}-{{ value.sex }}
+      </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+      Vue.config.productionTip = false
+      new Vue({
+          el: '#root12-4',
+          data: {
+              sortType: 0,
+              persons: [
+                  {id: '001', name: '马冬梅', age: 19, sex: '女'},
+                  {id: '003', name: '周杰伦', age: 21, sex: '男'},
+                  {id: '002', name: '周冬雨', age: 20, sex: '女'},
+                  {id: '004', name: '温兆伦', age: 22, sex: '男'}
+              ],
+              keyword: '',
+          },
+          computed: {
+              filteredPerson() {
+                  const res = this.persons.filter(value => {
+                      return value.name.indexOf(this.keyword) !== -1
+                  })
+                  if (this.sortType) {
+                      if (this.sortType === 1) {
+                          return res.sort((value1, value2) => {
+                              return value1.age - value2.age
+                          })
+                      } else if (this.sortType === 2) {
+                          return res.sort((value1, value2) => {
+                              return value2.age - value1.age
+                          })
+                      }
+                  }else {
+                      return  res
+                  }
+              }
+          }
+      })
+  </script>
+</body>
+
+</html>
