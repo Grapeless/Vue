@@ -6,7 +6,8 @@ module.exports = defineConfig({
     lintOnSave:false,
     pages:{
         index:{
-            entry:path.join(__dirname,'./src/main.js')
+            entry:path.join(__dirname,'./sections/section-20/18_src_TodoList_动画/main.js'),
+
         }
     }
 })

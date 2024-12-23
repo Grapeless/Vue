@@ -22,7 +22,8 @@ export default {
         }
     },
     mounted() {
-        //给student的vc实例对象绑定($on)事件(devent),事件被触发时调用指定的回调函数
+        //给student的vc实例对象绑定($on)事件(devent),事件被触发时调用指定的回调函数,回调函数的参数来自
+        //$emit(event,arg)里的arg
         this.$refs.student.$on('devent',this.showStudentName)
     }
 }
