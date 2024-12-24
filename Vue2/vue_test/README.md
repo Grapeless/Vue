@@ -383,6 +383,7 @@ module.exports = {
                     <div>html结构1</div>
                   </template>
       
+                  <!--该设置名字的方式仅template标签可用-->
                   <template v-slot:footer>
                      <div>html结构2</div>
                   </template>

@@ -6,8 +6,30 @@ module.exports = defineConfig({
     lintOnSave:false,
     pages:{
         index:{
-            entry:path.join(__dirname,'./sections/section-20/18_src_TodoList_动画/main.js'),
-
+            entry:path.join(__dirname,'./sections/section-30/20_src_github搜索案例/main.js'),
+        }
+    },
+    devServer: {
+        // proxy: 'http://localhost:5000'
+        proxy: {
+            '/api/students': {
+                //原始请求路径
+                target: 'http://localhost:5000',
+                //websocket
+                ws: true,
+                //换源策略
+                changeOrigin: true,
+                //请求路径重写，键：匹配路径的正则表达式，值：替换值
+                pathRewrite:{'^/api/students':'students'}
+            },
+            //可匹配多个
+            '/api/cars': {
+                target: 'http://localhost:5001',
+                //默认为真
+                /*ws:true,
+                changeOrigin:true,*/
+                pathRewrite:{'^/api/cars':'cars'}
+            }
         }
     }
 })
