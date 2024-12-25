@@ -547,7 +547,7 @@ module.exports = {
 
 ### 5.getters的使用
 
-1. 概念：当state中的数据需要经过加工后再使用时，可以使用getters加工。
+1. 概念：当state中的数据需要经过加工后再使用时，可以使用getters加工。（推荐在该数据获取逻辑复杂，且需要复用时使用）
 
 2. 在```store.js```中追加```getters```配置
 
