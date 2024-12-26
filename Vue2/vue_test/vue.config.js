@@ -6,7 +6,7 @@ module.exports = defineConfig({
     lintOnSave:false,
     pages:{
         index:{
-            entry:path.join(__dirname,'./sections/section-30/29_src_求和案例_vuex模块化编码/main.js'),
+            entry:path.join(__dirname,'./sections/section-40/42_src_组件内路由守卫/main.js'),
         }
     },
     devServer: {
