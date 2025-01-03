@@ -5,7 +5,7 @@ module.exports = defineConfig({
     lintOnSave: false,
     pages: {
         index: {
-            entry: path.join(__dirname, './sections/section-10/10_src_watchEffect函数/main.js'),
+            entry: path.join(__dirname, './sections/section-20/13_src_toRef与toRefs/main.js'),
         }
     },
     chainWebpack: (config) => {
