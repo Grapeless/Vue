@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .abc{
+        @apply text-green-300
+    }
+}
+
+@layer utilities{
+    .clearfix::after {
+        content: "";
+        display: block;
+        clear:both;
+        }
+}
