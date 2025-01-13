@@ -32,7 +32,7 @@ npm run build
 
 ​	https://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=19&page_start=9
 
-sort: recommed（推荐）,time(时间),rank(评分)
+sort: recommend（推荐）,time(时间),rank(评分)
 
 ![image-20250112101100987](D:\Project\Vue\Project\movie-display\assets\image-20250112101100987.png)
 
