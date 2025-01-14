@@ -1,10 +1,10 @@
 <template>
     <!--<DarkModeTest></DarkModeTest>-->
     <!--<MediaQueryTest></MediaQueryTest>-->
-    <!--<ResponsiveMenu></ResponsiveMenu>-->
+    <ResponsiveMenu></ResponsiveMenu>
     <!--<TalkModule></TalkModule>-->
     <!--<CapsuleButton></CapsuleButton>-->
-    <ContractionMenu></ContractionMenu>
+    <!--<ContractionMenu></ContractionMenu>-->
 </template>
 <script setup>
 

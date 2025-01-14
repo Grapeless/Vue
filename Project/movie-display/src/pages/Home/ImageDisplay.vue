@@ -21,8 +21,8 @@
             </div>
 
             <!--图片-->
-            <img :src="realUrl" alt=""
-                 class="rounded bg-cover shadow-lg shadow-slate-200 size-full">
+            <img :src="cover" alt=""
+                 class="rounded bg-contain shadow-lg shadow-slate-200 size-full">
         </div>
 
         <!--hover特效1--偏移边框-->
@@ -31,11 +31,28 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref, watch} from "vue";
+import axios from "axios";
 
-const {cover} = defineProps(['cover'])
-//不拼接这个报403啊啊啊啊啊啊啊，加了又好慢
-const realUrl = ref('https://images.weserv.nl/?url='+cover.substring(7))
+const {params} = defineProps(['params'])
+const cover = ref()
+
+async function fetchData() {
+    const res = await axios({
+        url: '/api/j/search_subjects',
+        params
+    })
+    //不拼接这个报403啊啊啊啊啊啊啊，加了又好慢
+    cover.value = 'https://images.weserv.nl/?url=' + res.data['subjects'][0].cover.substring(7)
+}
+
+onMounted(() => {
+    fetchData()
+})
+
+watch(() => params, () => {
+    fetchData()
+}, {deep: true})
 
 </script>
 

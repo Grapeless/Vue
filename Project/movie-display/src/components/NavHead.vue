@@ -22,12 +22,23 @@
             </ul>
 
             <!--搜索-->
-            <svg class="mx-16 hidden cursor-pointer size-5 lg:block"
-                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                 stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-            </svg>
+            <div class="lg:flex ml-12 hidden  cursor-pointer items-center">
+                <!--搜索框-->
+                <input type="text"
+                       placeholder="What type?"
+                       ref="searchInp"
+                       class="pl-2 placeholder:text-sm placeholder:font-['JetBrains_Mono'] w-32 h-8 duration-200 outline-none rounded mr-4 bg-cyan-50"
+                       :class="{'w-0':searchButtonState}">
+
+                <!--放大镜图标-->
+                <svg class=" size-5 "
+                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                     stroke="currentColor"
+                    @click="searchMovie">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                </svg>
+            </div>
 
             <!--响应式菜单按钮-->
             <AnimatedButton :isOpen="isOpen" :updateIsOpen="updateIsOpen"></AnimatedButton>
@@ -38,7 +49,9 @@
              :class="isOpen?'right-0':'-right-full'">
 
             <ul class="flex flex-col gap-y-5">
-                <li class="pt-8 pr-10"><AnimatedButton :isOpen="isOpen" :updateIsOpen="updateIsOpen"/></li>
+                <li class="pt-8 pr-10">
+                    <AnimatedButton :isOpen="isOpen" :updateIsOpen="updateIsOpen"/>
+                </li>
                 <li v-for="(value,index) in pages" :key="index"
                     class="cursor-pointer rounded p-3 duration-200 hover:bg-cyan-100/70">
                     <RouterLink :to="{path:`/${value}`}">{{ value }}</RouterLink>
@@ -56,16 +69,41 @@
 
 <script setup>
 import {RouterLink, RouterView} from "vue-router";
-import {ref} from "vue";
+import {ref, toRef} from "vue";
 import AnimatedButton from "@/components/AnimatedButton.vue";
+import {useHomeSearchValue} from "@/store/useHomeSearchValue.js";
+import {storeToRefs} from "pinia";
 
 const pages = ref(['Home', 'Category', 'Fav', 'Pages', 'Blogs'])
 
 //使用AnimatedButton组件时需要传递的参数和函数，能够跨组件保持按钮状态的独立，
 //但同一个组件间仍然会连携，刚好利用这个特点实现切换
 const isOpen = ref(false)
-const updateIsOpen = function (){
+const updateIsOpen = function () {
     isOpen.value = !isOpen.value
+}
+
+//搜索按钮的状态
+const searchButtonState = ref(false)
+
+//搜索框的ref对象
+const searchInp = ref()
+
+//pinia对象保存搜索值
+//要么解构storeToRefs(useHomeSearchValue())，然后通过.value访问
+//要么直接通过useHomeSearchValue()这本来是一个函数返回的对象，通过点语法访问
+const {homeSearchValue} = storeToRefs(useHomeSearchValue())
+
+const searchMovie = function () {
+    //无搜索值则关闭搜索
+    if(!searchInp.value.value){
+        searchButtonState.value = !searchButtonState.value
+    }
+    //传值至pinia
+    homeSearchValue.value = searchInp.value.value
+    //清空表单
+    searchInp.value.value = ''
+
 }
 </script>
 
